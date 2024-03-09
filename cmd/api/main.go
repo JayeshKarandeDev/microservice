@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+)
 
 func main() {
-	fmt.Println("Hellow")
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", home)
+	http.ListenAndServe(":4000", mux)
+}
+
+func home(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hellow from root"))
 }
