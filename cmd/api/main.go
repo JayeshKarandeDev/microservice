@@ -7,9 +7,9 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", home)
-	mux.HandleFunc("/variables", variables)
-	mux.HandleFunc("/snippets", createSnippets)
+	mux.HandleFunc("GET /", home)
+	mux.HandleFunc("GET /variables", variables)
+	mux.HandleFunc("POST /snippets", createSnippets)
 	fmt.Println("Listing server on http://localhost:4000")
 	http.ListenAndServe(":4000", mux)
 }
@@ -32,12 +32,12 @@ func variables(w http.ResponseWriter, r *http.Request) {
 }
 
 func createSnippets(w http.ResponseWriter, r *http.Request) {
+	// this if check is useless now as we have added method POST in the routing as part of go 1.22
 	if r.Method != "POST" {
 		w.Header().Set("Allow", "POST")
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
-
 	// If the method is POST, execute this block
 	w.Write([]byte("Create a new snippet..."))
 }

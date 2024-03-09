@@ -1,3 +1,3 @@
-module github.com/JayeshKarandeDev/go/microservice
+module github.com/JayeshKarandeDev/microservice
 
 go 1.22.1
