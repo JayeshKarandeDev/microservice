@@ -9,10 +9,16 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", home)
 	mux.HandleFunc("/variables", variables)
+	mux.HandleFunc("/snippets", createSnippets)
+	fmt.Println("Listing server on http://localhost:4000")
 	http.ListenAndServe(":4000", mux)
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
 	w.Write([]byte("Hellow from root"))
 }
 
@@ -23,4 +29,15 @@ func variables(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Slice of bytes:", byteSlice, byteSlice1)
 	fmt.Println("byte to string:", string(byteSlice), string(byteSlice1))
 	w.Write([]byte("check the output in terminal"))
+}
+
+func createSnippets(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		w.Header().Set("Allow", "POST")
+		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// If the method is POST, execute this block
+	w.Write([]byte("Create a new snippet..."))
 }

@@ -1,0 +1,48 @@
+# Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go build output
+_obj
+_test
+_testmain.go
+
+# Go coverage files
+*.out
+
+# Go dependencies
+vendor/
+
+# Go build cache
+_gopath
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+*.sublime-project
+*.sublime-workspace
+*.pss
+*.vgcore
+*.pidb
+*.svclog
+*.sdf
+*.suo
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+/tmp
