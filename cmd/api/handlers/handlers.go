@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os"
 	"strconv"
 )
 
@@ -14,7 +13,6 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// w.Write([]byte("Hellow from root"))
-	fmt.Println(os.Getwd())
 	files := []string{
 		"ui/html/pages/home.tmpl.html",
 		"ui/html/pages/base.tmpl.html",

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 
@@ -13,6 +14,8 @@ func main() {
 	mux.HandleFunc("GET /variables", handler.Variables)
 	mux.HandleFunc("POST /snippets", handler.CreateSnippets)
 	mux.HandleFunc("GET /snippet/view", handler.ViewSnippet)
-	fmt.Println("Listing server on http://localhost:4000")
-	http.ListenAndServe(":4000", mux)
+	addr := flag.String("addr", ":4000", "HTTP network address")
+	flag.Parse()
+	fmt.Println("Listing server on http://localhost", *addr)
+	http.ListenAndServe(*addr, mux)
 }
