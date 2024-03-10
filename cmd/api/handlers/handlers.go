@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 	"strconv"
 )
 
@@ -13,10 +14,15 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// w.Write([]byte("Hellow from root"))
-	files := []string{"./ui/html/pages/home.tmpl.html", "./ui/html/pages/base.tmpl.html", "./ui/html/pages/nav.tmpl.html"}
+	fmt.Println(os.Getwd())
+	files := []string{
+		"ui/html/pages/home.tmpl.html",
+		"ui/html/pages/base.tmpl.html",
+		"ui/html/pages/nav.tmpl.html",
+	}
 	t, err := template.ParseFiles(files...)
 	if err != nil {
-		// log.print(err.Error())
+		fmt.Println(err.Error())
 		http.Error(w, "internal server error", 500)
 		return
 	}
